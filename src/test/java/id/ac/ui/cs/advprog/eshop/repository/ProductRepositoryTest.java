@@ -64,7 +64,6 @@ class ProductRepositoryTest {
           Iterator<Product> productIterator = productRepository.findAll();
           assertTrue(productIterator.hasNext());        
           Product savedProduct = productIterator.next();
-          savedProduct = productIterator.next();
           assertEquals(product1.getProductId(), savedProduct.getProductId());
           savedProduct = productIterator.next();
           assertEquals(product2.getProductId(), savedProduct.getProductId());        
