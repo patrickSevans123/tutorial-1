@@ -10,46 +10,50 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 @Controller
-@RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private ProductService service;
+    
+    @GetMapping("/")
+    public String homePage(){
+        return "homePage";
+    }
 
-    @GetMapping("/create")
+    @GetMapping("/product/create")
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "createProduct";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/product/create")
     public String createProductPost(@ModelAttribute Product product, Model model) {
         service.create(product);
         return "redirect:list";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable String id, Model model) {
         service.delete(id);
         return "redirect:../list";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/product/edit/{id}")
     public String editProductPage(@PathVariable("id") String id, Model model) {
         Product product = service.findById(id);
         model.addAttribute("product", product);
         return "editProduct";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/product/edit/{id}")
     public String editProductPost(@PathVariable("id") String id, @ModelAttribute Product product, Model model){
         product.setProductId(id);
         service.edit(product);
         return "redirect:../list";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/product/list")
     public String productListPage(Model model) {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
