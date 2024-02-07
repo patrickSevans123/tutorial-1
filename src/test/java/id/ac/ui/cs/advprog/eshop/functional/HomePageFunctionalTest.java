@@ -21,15 +21,15 @@ class HomePageFunctionalTest {
     /**
      * The port number assigned to the running application during test execution.
 
-     * Set automatically during each test run by Spring Framework's test context.
-     */
+    * Set automatically during each test run by Spring Framework's test context.
+    */
 
     @LocalServerPort
     private int serverPort;
 
     /**
      * The base URL for testing. Default to {@code http://localhost}.
-     */
+    */
     @Value("${app.baseUrl:http://localhost}")
     private String testBaseUrl;
 
@@ -58,8 +58,9 @@ class HomePageFunctionalTest {
 
         // Verify
         assertEquals("Welcome To SGIE Shop", welcomeMessage);
-    }
+    }  
 }
+
 
 
 
