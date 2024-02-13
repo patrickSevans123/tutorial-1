@@ -1,3 +1,4 @@
+
 plugins {
 	java
 	jacoco
@@ -11,9 +12,6 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_21
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
 }
 
 configurations {
@@ -47,7 +45,7 @@ dependencies {
 }
 
 tasks.register<Test>("unitTest") {
-	description = "Run unit tests."
+	description = "Runs unit tests."
 	group = "verification"
 
 	filter {
@@ -56,7 +54,7 @@ tasks.register<Test>("unitTest") {
 }
 
 tasks.register<Test>("functionalTest") {
-	description = "Run functional tests."
+	description = "Runs functional tests."
 	group = "verification"
 
 	filter {
@@ -77,5 +75,10 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
-	dependsOn((tasks.test))
+	dependsOn(tasks.test)
+
+	reports {
+		html.required = true
+		xml.required = true
+	}
 }
