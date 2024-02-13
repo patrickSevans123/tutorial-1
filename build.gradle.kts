@@ -1,3 +1,8 @@
+import org.sonarsource.kotlin.buildsrc.tasks.CreateKotlinGradleRuleStubsTask
+import org.sonarsource.kotlin.buildsrc.tasks.CreateKotlinRuleStubsTask
+import org.sonarsource.kotlin.buildsrc.tasks.FetchRuleMetadata
+
+
 plugins {
 	java
 	jacoco
