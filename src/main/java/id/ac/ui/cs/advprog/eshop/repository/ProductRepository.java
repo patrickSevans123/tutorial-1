@@ -13,7 +13,6 @@ public class ProductRepository {
     static int id = 0;
 
     public Product create(Product product) {
-        product.setProductId(String.valueOf(id++));
         productData.add(product);
         return product;
     }

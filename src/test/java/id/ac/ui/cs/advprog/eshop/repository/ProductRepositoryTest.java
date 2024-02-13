@@ -74,9 +74,9 @@ class ProductRepositoryTest {
         @Test
         void testSuccessDeleteProduct() {
             Product product1 = new Product();
-            product1.setProductId("123");
             product1.setProductName("Cah Kangkung");
             product1.setProductQuantity(1);
+            product1.setProductId("123");
             productRepository.create(product1);
 
             productRepository.delete("123");
@@ -87,59 +87,110 @@ class ProductRepositoryTest {
             }
         }
 
-        @Test
-        void testFailedDeleteProduct() {
-            Product product1 = new Product();
-            product1.setProductName("Lontong");
-            product1.setProductId("123");
-            product1.setProductQuantity(1);
-            productRepository.create(product1);
-
-            productRepository.delete("124");
-            assertNotNull(productRepository.findById(product1.getProductId()));
-        }
-
-        @Test
-        void testSuccessEditProduct() {
-            Product product1 = new Product();
-            product1.setProductId("123");
-            product1.setProductName("Cah Kangkung");
-            product1.setProductQuantity(1);
-            productRepository.create(product1);
-
-            Product product2 = new Product();
-            product2.setProductId(product1.getProductId());
-            product2.setProductName("Ayam Bakar");
-            product2.setProductQuantity(2);
-
-            productRepository.edit(product2);
-
-            Product findedProduct = productRepository.findById(product1.getProductId());
-
-            // Produk dengan ID 123 telah berubah namanya menjadi ayam bakar
-            assertEquals(findedProduct.getProductName(), "Ayam Bakar");
-        }
-
-        @Test
-        void testFailedEditProduct() {
+    @Test
+    void testFailedDeleteProduct() {
         Product product1 = new Product();
         product1.setProductId("123");
         product1.setProductName("Cah Kangkung");
         product1.setProductQuantity(1);
         productRepository.create(product1);
 
-        //Edit produk yang idnya tidak ada di program
         Product product2 = new Product();
-        product2.setProductId("id ngasal");
+        product2.setProductId("456");
+        product2.setProductName("Nasi Goreng");
+        product2.setProductQuantity(1);
+        productRepository.create(product2);
+
+        // Delete product dengan id yang tidak ada
+        productRepository.delete("789");
+
+         assertNotNull(productRepository.findById("123"));
+         assertNotNull(productRepository.findById("456"));
+
+        // Cek tidak ada yang terhapus
+        assertEquals(2, countProducts(productRepository.findAll()));
+    }
+
+    // Function pembantu delete failed product
+    private int countProducts(Iterator<Product> productIterator) {
+        int count = 0;
+        while (productIterator.hasNext()) {
+            productIterator.next();
+            count++;
+        }
+        return count;
+    }
+
+    @Test
+    void testFindByIdExistingProduct() {
+        Product product1 = new Product();
+        product1.setProductName("Cah Kangkung");
+        product1.setProductQuantity(1);
+        productRepository.create(product1);
+        product1.setProductId("123");
+
+        Product foundProduct = productRepository.findById("123");
+
+        assertNotNull(foundProduct);
+
+        assertEquals(product1, foundProduct);
+    }
+
+    @Test
+    void testFindByIdNonExistingProduct() {
+        Product product1 = new Product();
+        product1.setProductName("Cah Kangkung");
+        product1.setProductQuantity(1);
+        productRepository.create(product1);
+        product1.setProductId("123");
+
+        Product foundProduct = productRepository.findById("789");
+
+        assertNull(foundProduct);
+    }
+
+
+    @Test
+    void testSuccessEditProduct() {
+        Product product1 = new Product();
+        product1.setProductId("123");
+        product1.setProductName("Cah Kangkung");
+        product1.setProductQuantity(1);
+        productRepository.create(product1);
+
+        Product product2 = new Product();
+        product2.setProductId(product1.getProductId());
         product2.setProductName("Ayam Bakar");
         product2.setProductQuantity(2);
 
         productRepository.edit(product2);
 
-        //Mencari produk dengan id 123
         Product findedProduct = productRepository.findById(product1.getProductId());
 
-        //Produk dengan id 123 tidak berubah namanya karena program tidak berhasil mencari produk dengan id ngasal
-        assertEquals(findedProduct.getProductName(), "Cah Kangkung");
-        }
+        // Produk dengan ID 123 telah berubah namanya menjadi ayam bakar
+        assertEquals(findedProduct.getProductName(), "Ayam Bakar");
     }
+
+    @Test
+    void testFailedEditProduct() {
+    Product product1 = new Product();
+    product1.setProductId("123");
+    product1.setProductName("Cah Kangkung");
+    product1.setProductQuantity(1);
+    productRepository.create(product1);
+
+    //Edit produk yang idnya tidak ada di program
+    Product product2 = new Product();
+    product2.setProductId("id ngasal");
+    product2.setProductName("Ayam Bakar");
+    product2.setProductQuantity(2);
+
+    productRepository.edit(product2);
+
+    //Mencari produk dengan id 123
+    Product findedProduct = productRepository.findById(product1.getProductId());
+
+    //Produk dengan id 123 tidak berubah namanya karena program tidak berhasil mencari produk dengan id ngasal
+    assertEquals(findedProduct.getProductName(), "Cah Kangkung");
+    }
+}
