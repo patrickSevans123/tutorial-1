@@ -1,8 +1,10 @@
+
 plugins {
 	java
 	jacoco
 	id("org.springframework.boot") version "3.2.2"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.sonarqube") version "4.4.1.3373"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -46,7 +48,7 @@ dependencies {
 }
 
 tasks.register<Test>("unitTest") {
-	description = "Run unit tests."
+	description = "Runs unit tests."
 	group = "verification"
 
 	filter {
@@ -55,7 +57,7 @@ tasks.register<Test>("unitTest") {
 }
 
 tasks.register<Test>("functionalTest") {
-	description = "Run functional tests."
+	description = "Runs functional tests."
 	group = "verification"
 
 	filter {
@@ -76,5 +78,10 @@ tasks.test {
 }
 
 tasks.jacocoTestReport {
-	dependsOn((tasks.test))
+	dependsOn(tasks.test)
+
+	reports {
+		html.required = true
+		xml.required = true
+	}
 }
