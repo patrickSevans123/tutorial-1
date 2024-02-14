@@ -1,3 +1,9 @@
+### SonarCloud Report
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hilaldfzn_tutorial-1&metric=coverage)](https://sonarcloud.io/summary/new_code?id=patrickSevans123_tutorial-1)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=patrickSevans123_tutorial-1&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=patrickSevans123_tutorial-1)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=patrickSevans123_tutorial-1&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=patrickSevans123_tutorial-1)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=patrickSevans123_tutorial-1&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hilaldfzn_tutorial-1)
+
 # Tutorial 1
 <details close>
 <summary>Click here</summary>
@@ -8,4 +14,14 @@ Saya telah mencoba untuk melakukan beberapa prinsip clean code, seperti meaningf
 
 ## Reflection 2
 Saya merasa senang setelah mencoba membuat unit-test dan functional-test karena ini merupakan kali pertama saya membuat fungsi untuk testing. Menurut saya, kuantitas dari unit test tidak menjadi hal yang utama. Hal terpenting yang wajib diperhatikan pada error-handling adalah cakupan test case. Semakin banyak test case yang dapat dihandle, semakin baik pula unit-test tersebut. Menurut saya, 100% code coverage tidak menjamin suatu kode tidak memiliki error karena bisa saja ada test case yang tidak tercakup pada kode tersebut. Apabila saya harus membuat functional test untuk memverifikasi jumlah produk, saya tidak akan membuat class baru dan membuatnya di `CreateProductFunctionalTest.java` saja untuk mengurangi redundansi. Saya merasa test-test yang telah saya buat sudah cukup baik, tetapi dapat di-improve dengan meningkatkan cakupan test case yang dapat di-handle.
+</details>
+</br>
+
+# Tutorial 2
+<details open>
+<summary>Click here</summary>
+
+Selama mengerjakan *exercise*, saya menggunakan dua *code analyzer*, yaitu PMD dan Sonarcloud. Pertama, saya memperbaiki *code issues* yang ditemukan oleh PMD. Saya memperbaiki kode *import* yang tidak diperlukan. Kemudian, saya memperbaiki modifier public yang ada di berkas ProductService.java. Setelah itu, saya mencoba menggunakan SonarCloud Code Analyzer. SonarCloud tidak menemukan adanya *issue* pada kode saya. Setelah saya memperbaiki *issues*, saya rasa kode saya sudah cukup baik.
+
+Saya merasa bahwa kode yang saya buat telah memenuhi persyaratan CI/CD karena saya telah melakukan beberapa hal. Pertama, saya sudah membuat `ci.yml` untuk melakukan *testing* setiap melakukan *push/pull* pada setiap *branch*. Saya juga telah membuat `pmd.yml` dan `sonarcloud.yml` untuk menguji kualitas kode. Selain itu, saya juga menggunakan `scorecard.yml` untuk menguji keamanan kode. Koyeb, PaaS yang saya gunakan, menyediakan beberapa CI/CD yang mengotomasi *deployment* setiap terdapat *push*.
 </details>
