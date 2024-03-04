@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
     @InjectMocks
-    OrderService orderService;
+    OrderServiceImpl orderService;
     @Mock
     OrderRepository orderRepository;
     List<Order> orders;
@@ -37,9 +37,9 @@ class OrderServiceImplTest {
 
         orders = new ArrayList<>();
         Order order1 = new Order(
-                "13652556-0128-4c07-b546-54eb1396d79b",
+                "13652556-012a-4c07-b546-54eb1396d79b",
                 products,
-                1708560060L,
+                1708560000L,
                 "Safira Sudrajat"
         );
         orders.add(order1);
@@ -74,7 +74,6 @@ class OrderServiceImplTest {
 
     @Test
     void testUpdateStatus() {
-
         Order order = orders.get(1);
 
         Order newOrder = new Order(order.getId(), order.getProducts(), order.getOrderTime(),
