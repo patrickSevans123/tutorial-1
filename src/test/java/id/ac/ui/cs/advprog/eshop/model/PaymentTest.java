@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
-import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,6 +75,16 @@ class PaymentTest {
         assertEquals("REJECTED", payment.getStatus());
     }
 
+    @Test
+    void testCreatePaymentVoucherCodeRejectedNull(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("voucherCode", null);
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "VOUCHER_CODE", paymentData);
+
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
 
     @Test
     void testSetStatusPaymentVoucherCodeSuccess(){
@@ -141,6 +150,50 @@ class PaymentTest {
     }
 
     @Test
+    void testCreatePaymentCODRejectedAddressNull(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("address", null);
+        paymentData.put("deliveryFee", "10000");
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "CASH_ON_DELIVERY", paymentData);
+
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testCreatePaymentCODRejectedAddressBlank(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("address", "");
+        paymentData.put("deliveryFee", "10000");
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "CASH_ON_DELIVERY", paymentData);
+
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testCreatePaymentCODRejectedAddressDeliveryFeeBlank(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("address", "Jalan Sama Kamu");
+        paymentData.put("deliveryFee", "");
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "CASH_ON_DELIVERY", paymentData);
+
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
+    void testCreatePaymentCODRejectedAddressDeliveryFeeNull(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("address", "Jalan Sama Kamu");
+        paymentData.put("deliveryFee", null);
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "CASH_ON_DELIVERY", paymentData);
+
+        assertEquals("REJECTED", payment.getStatus());
+    }
+
+    @Test
     void testSetStatusPaymentCODSucess(){
         Map<String, String> paymentData = new HashMap<String, String>();
         paymentData.put("address", "Jalan Sore");
@@ -174,5 +227,17 @@ class PaymentTest {
             Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
                     this.orders.getFirst(), "KASBON", paymentData);
         });
+    }
+
+    @Test
+    void tesCreatePaymentWithStatus(){
+        Map<String, String> paymentData = new HashMap<String, String>();
+        paymentData.put("address", "Jalan Aja Dulu");
+        paymentData.put("deliveryFee", "10000");
+        Payment payment = new Payment("8e4b50d3-f58f-4b97-af2b-9fba86d6ebe7",
+                this.orders.getFirst(), "CASH_ON_DELIVERY", paymentData, "SUCCESS");
+
+        payment.setStatus("REJECTED");
+        assertEquals("FAILED", payment.getOrder().getStatus());
     }
 }
