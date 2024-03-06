@@ -1,3 +1,4 @@
+
 package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
@@ -29,7 +31,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         if (payment.getStatus().equals(PaymentStatus.SUCCESS.getValue())) {
             payment.getOrder().setStatus(OrderStatus.SUCCESS.getValue());
-        } else if (payment.getStatus().equals(PaymentStatus.REJECTED.getValue())) {
+        } else {
             payment.getOrder().setStatus(OrderStatus.FAILED.getValue());
         }
     }
