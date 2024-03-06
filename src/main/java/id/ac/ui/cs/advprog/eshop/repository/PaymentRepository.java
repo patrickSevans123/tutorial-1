@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentRepository {
-    private final Map<String, Payment> paymentMap = new HashMap<>();
+    private final Map<String, Payment> paymentData = new HashMap<>();
 
     public Payment save(Payment payment) {
-        paymentMap.put(payment.getId(), payment);
+        paymentData.put(payment.getId(), payment);
         return payment;
     }
 
     public Payment findById(String id) {
-        return paymentMap.get(id);
+        return paymentData.get(id);
     }
 
     public List<Payment> getAllPayments() {
-        return new ArrayList<>(paymentMap.values());
+        return new ArrayList<>(paymentData.values());
     }
 }
