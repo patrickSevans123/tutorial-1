@@ -30,7 +30,7 @@ Saya merasa bahwa kode yang saya buat telah memenuhi persyaratan CI/CD karena sa
 </br>
 
 # Tutorial 3
-<details open>
+<details close>
 <summary>Click here</summary>
 
 Saya telah menggunakan prinsip-prinsip SOLID pada projek ini, yaitu:
@@ -60,4 +60,14 @@ Kerugian menerapkan prinsip SOLID:</br>
 - Sulit melakukan perubahan karena kode yang tidak terstruktur.
 - Kesulitan dalam membuat *test* karena *method-method* yang ada terlalu panjang dan sulit dimengerti.
 - Mudah melakukan *tracing error* karena kode yang ada tidak terkonsep dengan baik.
+</details>
+
+# Tutorial 4
+<details open>
+<summary>Click here</summary>
+
+1. Menurut saya TDD flow sangat berguna dalam melakukan *programming*. TDD membuat kita membuat tes terlebih dahulu, sehingga kita bisa membuat acuan standar dari kode yang akan kita buat. Hal ini menyebabkan kita menetapkan standar yang tinggi pada kode kita terlebih dahulu, sehingga kita tidak bisa menurunkan standar kode yang akan dibuat (handle case aman saja). TDD Flow juga mengajarkan saya untuk melakukan *programming* secara terstruktur dengan tahapan-tahapan yang ada. Hal ini tentunya berdampak positif terhadap *maintainability* dari kode yang telah dibuat. 
+
+2. Saya telah menerapkan FIRST *principle* . Saya telah menggunakan berbagai fitur yang ada, seperti mock, assert, setUp, dan lain-lain. Saya telah memisahkan jenis-jenis test menjadi unit test dan functional test. Saya juga telah melakukan test happy dan unhappy yang mencakup berbagai kemungkinan.
+
 </details>
